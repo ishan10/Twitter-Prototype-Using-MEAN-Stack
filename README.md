@@ -1,20 +1,7 @@
 
 
-# Twitter
+# Twitter Prototype Using MEAN Stack and REST API
 
 
 
-## Usage
-
-
-
-## Developing
-
-
-
-### Tools
-
-Created with [Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1)
- ([Eclipse Marketplace](http://marketplace.eclipse.org/content/nodeclipse), [site](http://www.nodeclipse.org))   
-
-Nodeclipse is free open-source project that grows with your contributions.
+A sample Twitter Prototype using REST API, this appilcation allows sign-up, login , tweet, retweet, follow , hastag search and twitter handle search features.
