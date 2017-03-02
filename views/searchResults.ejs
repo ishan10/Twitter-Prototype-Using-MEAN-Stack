@@ -1,0 +1,134 @@
+<html>
+<head>
+<meta charset="utf-8">
+
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="angularjs/searchResultsController.js"></script>
+</head>
+<body style="background-color: #f5f8fa;">
+<div ng-app="searchResults">
+<div ng-controller="ResultsDisplayController">
+	
+	<div class="ProfilePage-editingOverlay"></div>
+	<div class="global-nav-inner">
+	<div class="container">
+		<h1 class="Icon Icon--bird bird-topbar-etched"><img style="height: 21px;" src="/images/twitterIcon.png"><span class="visuallyhidden">Twitter</span></h1>
+		<div role="navigation" style="display: inline-block;"></div>	
+
+		<div class="pull-right" style="display: inline-block;margin-right: 112px;">
+			<div role="search">
+				<form class="t1-form form-search">
+					<input class="searchbox" type="text" placeholder="Search Twitter" ng-model="searchInput">
+						<span class="search-icon">
+							<span class="glyphicon glyphicon-search" tabindex="-1" style="margin-top: 6px;" ng-click="searchSession(searchInput);"></span>
+						</span>
+					<button class="btn primary-btn tweetButton pull-right" style="margin-top: -33px;margin-right: -134px"type="submit"  ng-click="signOut();"><span class="buttonText">Sign Out</span></button>
+					</form>
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+
+<div ng-hide="showProfile">
+ <div  ng-repeat="list in resultList">
+	<div class="Grid Grid--withGutter">
+		<div class="Grid-cell">
+			<div class="ProfileHeading">
+				<div class="ProfileHeading-spacer"></div>
+			</div>
+				<div class="GridTimeline">
+					<div class="stream-item js-new-items-bar-container"></div>
+					<div class="GridTimeline-items" role="list">
+						<div class="Grid Grid--withGutter" data-component-context="user" role="presentation">
+							<div class="Grid-cell u-size1of2 u-lg-size1of3 u-mb10" data-test-selector="ProfileTimelineUser" role="presentation">
+								<div class="js-stream-item" role="listitem">
+									<div class="ProfileCard">
+										<a class="ProfileCard-bg" href tabindex="-1"  style="background-color: #0084B4;"></a>
+										<div class="ProfileCard-content">
+											<a class="ProfileCard-avatarLink"
+													href tabindex="-1"><img
+													class="ProfileCard-avatarImage"
+													src="/images/default_profile_tweet.png"
+													alt=""></a>
+											<div class="ProfileCard-userFields">
+												<div class="ProfileNameTruncated">
+													<div class="u-textTruncate u-inlineBlock">
+														<a class="ProfileNameTruncated-link u-textInheritColor" href >{{list.fullname}}</a>
+													</div>
+												</div>
+												<span class="ProfileCard-screenname u-dir" dir="ltr">
+												<a href class="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part=""> @<span class="u-linkComplex-target">{{list.userid}}</span> </a>
+												</span>	
+												<p class="ProfileCard-bio u-dir" dir="ltr" data-aria-label-part="">Aaine mein jo khud ko talaasha, kabhi khud ko dekha, kabhi parody dikhi. Uns kab hua, yeh pata na chala.</p>
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+</div>
+
+<div  class="content-main top-timeline-tweetbox" id="timeline" ng-hide="showProfileTweet">
+<div style="margin-top: 62px;">
+<div class="panel panel-default" style="margin-right: 90px; cursor: pointer;"  ng-repeat="tweet in resultList"> 
+  <div class="panel-body" style="height: 120px;">
+  <div><img class="avatar js-action-profile-avatar feedImage" src="/images/feedImage.jpg"/></div>
+  <div class="fullname"><a href ng-click="profile();" style="color: #292f33;" ><strong style="margin-left: 10px;"><span ng-model="username">{{tweet.firstname}} {{tweet.lastname}}</span> </strong> @<b style="font-weight: normal" ng-model="userid">{{tweet.userid}}</b></a><br>
+  <p style="margin-left: 40px;word-wrap: break-word;">{{tweet.tweet_comments}}</p>
+  </div>
+  
+  </div>
+  <div ng-if="showRetweetButton(tweet.retweet_user);">
+  
+	<p style="margin-left: 153px;">
+  		<a href><span class="glyphicon glyphicon-retweet" ng-click="retweet(tweet.tweet_comments,tweet.userid);"></span></a>
+  	</p>
+  </div>
+</div>
+
+</div>
+
+
+</div>
+	
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>

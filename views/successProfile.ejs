@@ -1,0 +1,159 @@
+<html>
+<head>
+<meta charset="utf-8">
+
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="angularjs/profileDetails.js"></script>
+</head>
+<body ng-app="profileDetails" style="background-color: #f5f8fa;">
+<div ng-controller="ProfileDetailsController">
+<% include topNavBar.ejs %>
+<div class="imageBg">
+<div style="padding-top: 59px;"></div>
+<div class="ProfileAvatar"><img class = "ProfileAvatar-image" src="/images/profileImage.jpg">
+<div class="ProfileCanopy-avatar">
+
+</div>
+</div></div>
+
+<div class="navBarPF">
+<ul>
+      <li><a href ng-click="showTweets();"><span class="letters">tweets</span><div style="margin-bottom: -4px"></div><span id="count1">3</span></a></li>
+      <li><a href ng-click="showFollowing();"><span class="letters">following</span><div style="margin-bottom: -4px"></div><span id="count2">3</span></a></li>
+      <li><a href ng-click="showFollowers();"><span class="letters">followers</span><div style="margin-bottom: -4px"></div><span id="count3">3</span></a></li>
+    </ul>
+
+</div>
+
+<div class="profileWrapper" >
+<div class="ProfileHeaderCard" >
+<div class="ProfileHeaderCard-nameLink">
+<span ng-model="firstname">{{firstname}} </span><span ng-model="lastname"> {{lastname}}</span>
+</div>
+<span ng-model="userid">@{{userid}}</span><br>
+<span ng-model="birthday">Birthday : {{birthday}}</span><br>
+<span ng-model="location">{{location}}</span><br>
+<span ng-model="contact">{{contact}}</span><br>
+</div>
+</div>
+
+
+
+<!-- <div ng-controller="ProfileFeedController"> -->
+<!-- Twitter Feed starts -->
+
+<div  class="content-main top-timeline-tweetbox" id="timeline" style="margin-top:-450px">
+<div ng-hide="showFeed">
+
+<div style="margin-top: 62px;">
+<div class="panel panel-default" style="margin-right: 90px; cursor: pointer;" ng-repeat="tweet in tweetData"> 
+  <div class="panel-body" style="height: 120px;" >
+  <div><img class="avatar js-action-profile-avatar feedImage" src="/images/feedImage.jpg"/></div>
+  <div class="fullname"><a ng-click="profile(tweet.userid);" style="color: #292f33;" ng-model="username"><strong style="margin-left: 10px;"><span>{{tweet.fullname}}</span> </strong> <b style="font-weight: normal">@{{tweet.userid}}</b></a><br>
+  <p style="margin-left: 40px;word-wrap: break-word;">{{tweet.tweet_comments}} </p>
+  </div>
+  
+  </div>
+</div>
+		
+</div>
+
+
+
+</div>
+<div ng-hide="showFollowingList" ng-repeat="list in following">
+	<div class="Grid Grid--withGutter">
+		<div class="Grid-cell">
+			<div class="ProfileHeading">
+				<div class="ProfileHeading-spacer"></div>
+			</div>
+				<div class="GridTimeline">
+					<div class="stream-item js-new-items-bar-container"></div>
+					<div class="GridTimeline-items" role="list">
+						<div class="Grid Grid--withGutter" data-component-context="user" role="presentation">
+							<div class="Grid-cell u-size1of2 u-lg-size1of3 u-mb10" data-test-selector="ProfileTimelineUser" role="presentation">
+								<div class="js-stream-item" role="listitem">
+									<div class="ProfileCard">
+										<a class="ProfileCard-bg" href tabindex="-1"  style="background-color: #0084B4;"></a>
+										<div class="ProfileCard-content">
+											<a class="ProfileCard-avatarLink"
+													href tabindex="-1"><img
+													class="ProfileCard-avatarImage"
+													src="/images/default_profile_tweet.png"
+													alt=""></a>
+											<div class="ProfileCard-userFields">
+												<div class="ProfileNameTruncated">
+													<div class="u-textTruncate u-inlineBlock">
+														<a class="ProfileNameTruncated-link u-textInheritColor" href >{{list.fullname}}</a>
+													</div>
+												</div>
+												<span class="ProfileCard-screenname u-dir" dir="ltr">
+												<a href class="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part=""> @<span class="u-linkComplex-target">{{list.userid}}</span> </a>
+												</span>	
+												<p class="ProfileCard-bio u-dir" dir="ltr" data-aria-label-part="">Aaine mein jo khud ko talaasha, kabhi khud ko dekha, kabhi parody dikhi. Uns kab hua, yeh pata na chala.</p>
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+
+
+<div ng-hide="showFollowersList" ng-repeat="list in followers">
+	<div class="Grid Grid--withGutter">
+		<div class="Grid-cell">
+			<div class="ProfileHeading">
+				<div class="ProfileHeading-spacer"></div>
+			</div>
+				<div class="GridTimeline">
+					<div class="stream-item js-new-items-bar-container"></div>
+					<div class="GridTimeline-items" role="list">
+						<div class="Grid Grid--withGutter" data-component-context="user" role="presentation">
+							<div class="Grid-cell u-size1of2 u-lg-size1of3 u-mb10" data-test-selector="ProfileTimelineUser" role="presentation">
+								<div class="js-stream-item" role="listitem">
+									<div class="ProfileCard">
+										<a class="ProfileCard-bg" href="/MainGulzar" tabindex="-1"  style="background-color: #0084B4;"></a>
+										<div class="ProfileCard-content">
+											<a class="ProfileCard-avatarLink"
+													href="/MainGulzar" tabindex="-1"><img
+													class="ProfileCard-avatarImage"
+													src="/images/default_profile_tweet.png"
+													alt=""></a>
+											<div class="ProfileCard-userFields">
+												<div class="ProfileNameTruncated">
+													<div class="u-textTruncate u-inlineBlock">
+														<a class="ProfileNameTruncated-link u-textInheritColor" href >{{list.fullname}}</a>
+													</div>
+												</div>
+												<span class="ProfileCard-screenname u-dir" dir="ltr">
+												<a href class="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part=""> @<span class="u-linkComplex-target">{{list.userid}}</span> </a>
+												</span>	
+												<p class="ProfileCard-bio u-dir" dir="ltr" data-aria-label-part="">Aaine mein jo khud ko talaasha, kabhi khud ko dekha, kabhi parody dikhi. Uns kab hua, yeh pata na chala.</p>
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+
+
+</div>
+<!-- </div> -->
+
+</body>
+</html>

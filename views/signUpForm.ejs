@@ -1,0 +1,110 @@
+<html>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <script src="angularjs/signup.js"></script>
+</head>
+<body ng-app="signUp" >
+<div style="background-image: url(/images/headerBackground.png);height:50px;" class="container-fluid">
+
+</div>
+ 
+<div class="col-sm-4 col-sm-offset-4" ng-controller="SignUpController">
+
+<form name="signUpForm"  novalidate ng-hide="showSignupForm">
+					<div class="alert alert-danger" ng-hide="existingUserName">
+						<strong>This Twitter handle exist, please chose another one.</strong>
+					</div>
+					<div class="alert alert-danger" ng-hide="unexpected_error">
+						<strong>Unexpected error, try again</strong>
+					</div>
+			
+<h2 style="text-align:left">Join Twitter today.</h2>
+<!-- <form action="/checkUser" method="post"> -->
+
+	<div class="form-group" ng-class="{ 'has-error' : signUpForm.firstname.$invalid && !signUpForm.firstname.$pristine }">
+      <label for="firstname">First Name:</label>
+      <input type="text" class="form-control input-lg" ng-model="firstname" name="firstname"  placeholder="Enter First name" required>
+            <p ng-show="signUpForm.firstname.$invalid && !signUpForm.firstname.$pristine" class="help-block">First name is required.</p>
+    </div>
+    
+    <div class="form-group" ng-class="{ 'has-error' : signUpForm.lastname.$invalid && !signUpForm.lastname.$pristine }">
+      <label for="lastname">Last Name:</label>
+      <input type="text" class="form-control input-lg" ng-model="lastname" name="lastname"  placeholder="Enter Last name" required>
+      		<p ng-show="signUpForm.lastname.$invalid && !signUpForm.lastname.$pristine" class="help-block">Last name is required.</p>
+    </div>
+    
+    <div class="form-group" ng-class="{ 'has-error' : signUpForm.email.$invalid && !signUpForm.email.$pristine }">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control input-lg" ng-model="email" name="email"  placeholder="Enter Email" required>
+      		<p ng-show="signUpForm.email.$invalid && !signUpForm.email.$pristine" class="help-block">Enter a valid email.</p>
+    </div>
+    
+    <div class="form-group" ng-class="{ 'has-error' : signUpForm.password.$invalid && !signUpForm.password.$pristine }">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control input-lg" ng-model="password" name="password" ng-minlength="4" placeholder="Enter password" required>
+      	<p ng-show="signUpForm.password.$invalid && !signUpForm.password.$pristine && signUpForm.password.$error.minlength" class="help-block">Password required, minimum 4 characters.</p>
+    </div>
+    
+    <div class="form-group" ng-class="{ 'has-error' : signUpForm.userid.$invalid && !signUpForm.userid.$pristine }">
+      <label for="userid">Username (Twitter Handle) :</label>
+      <input type="text" class="form-control input-lg" ng-model="userid" name="userid" placeholder="Enter your Username" required>
+      	<p ng-show="signUpForm.userid.$invalid && !signUpForm.userid.$pristine" class="help-block">Username is required.</p>
+    </div>
+    
+    <div class="form-group" ng-class="{ 'has-error' : signUpForm.birthday.$invalid && !signUpForm.birthday.$pristine }">
+      <label for="birthday">Birthday :</label>
+      <input type="date" class="form-control input-lg" ng-model="birthday" name="birthday" placeholder="yyyy/mm/dd" required>
+      	<p ng-show="signUpForm.birthday.$invalid && !signUpForm.birthday.$pristine" class="help-block">Enter your birth date</p>
+    </div>
+    
+    <div class="form-group" ng-class="{ 'has-error' : signUpForm.location.$invalid && !signUpForm.location.$pristine }">
+      <label for="location">Location :</label>
+      <input type="text" class="form-control input-lg" ng-model="location" name="location" placeholder="Location" required>
+      	<p ng-show="signUpForm.location.$invalid && !signUpForm.location.$pristine" class="help-block">Enter your location</p>
+    </div>
+    
+    <div class="form-group" ng-class="{ 'has-error' : signUpForm.contact.$invalid && !signUpForm.contact.$pristine }">
+      <label for="birthday">Contact :</label>
+      <input type="text" class="form-control input-lg" ng-model="contact" name="contact" placeholder="Contact" required>
+      	<p ng-show="signUpForm.contact.$invalid && !signUpForm.contact.$pristine" class="help-block">Enter your Contact</p>
+    </div>
+    
+<button  style="width: 425px;
+    background-color: #1da1f2;
+    background-repeat: no-repeat;
+    background-image: none;
+    box-shadow: none;
+    font-size: 16px;
+    font-weight: normal;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 4px;
+    color:white;" ng-click="twitterSignUp();"  type="submit" ng-disabled="signUpForm.$invalid">Sign Up</button>
+  
+
+    </form>
+
+<div ng-hide="showSignupSuccess"><br>
+<p style="text-align:center;">Your Twitter account has been created!</p><br>
+<button  style="width: 425px;
+    background-color: #1da1f2;
+    background-repeat: no-repeat;
+    background-image: none;
+    box-shadow: none;
+    font-size: 16px;
+    font-weight: normal;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 4px;
+    color:white;" ng-click="home();"  type="submit">Login</button>
+</div>
+
+</div>
+
+</body>
+</html>

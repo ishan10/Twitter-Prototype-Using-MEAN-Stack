@@ -1,0 +1,116 @@
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="angularjs/homeProfileController.js"></script>
+</head>
+
+<body class="twitterHome" ng-app="profileDetailsHome">
+<% include topNavBar.ejs %>
+<div class="topbar js-topbar" ng-controller="SearchController">
+<div class="ProfilePage-editingOverlay"></div>
+<div class="global-nav-inner">
+	<div class="container">
+		<h1 class="Icon Icon--bird bird-topbar-etched"><img style="height: 21px;" src="/images/twitterIcon.png"><span class="visuallyhidden">Twitter</span></h1>
+		<div role="navigation" style="display: inline-block;"></div>	
+
+		<div class="pull-right" style="display: inline-block;margin-right: 112px;">
+			<div role="search">
+				<form class="t1-form form-search">
+					<input class="searchbox" type="text" placeholder="Search Twitter" ng-model="searchInput">
+						<span class="search-icon">
+							<span class="glyphicon glyphicon-search" tabindex="-1" style="margin-top: 6px;" ng-click="searchSession(searchInput);"></span>
+						</span>
+					<button class="btn primary-btn tweetButton pull-right" style="margin-top: -33px;margin-right: -134px"type="submit"  ng-click="signOut();"><span class="buttonText">Sign Out</span></button>
+					</form>
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+</div>
+<div class="dashboard dashboard-left"  ng-controller="HomeProfileController">
+<div class="DashboardProfileCard module">
+	<a class="DashboardProfileCard-bg u-bgUserColor u-block  tabindex="-1"></a>
+		<div class="DashboardProfileCard-content">
+			<a class="DashboardProfileCard-avatarLink u-inlineBlock"></a>
+				<img class="DashboardProfileCard-avatarImage js-action-profile-avatar" src="/images/homePageImage.jpg"/>
+					<div class="DashboardProfileCard-userFields">
+						<div class="DashboardProfileCard-name u-textTruncate">
+							<a class="u-textInheritColor" href="#">Ishan Pandya</a>
+						</div>
+						<span class="DashboardProfileCard-screenname u-inlineBlock u-dir" dir="ltr">
+          <a class="DashboardProfileCard-screennameLink u-linkComplex u-linkClean" href="/itsmeishan10">@<span class="u-linkComplex-target">ishan</span></a>
+        </span>
+					
+					</div>	
+			
+			
+		</div>
+		
+		<div class="ProfileCardStats">
+			<ul class="ProfileCardStats-statList Arrange Arrange--bottom Arrange--equal">
+					<li class="ProfileCardStats-stat Arrange-sizeFit">
+						<a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav" title="3 Tweets" href="/itsmeishan10" data-element-term="tweet_stats">
+          					<span class="ProfileCardStats-statLabel u-block">Tweets</span>
+    						<span class="ProfileCardStats-statValue" data-is-compact="false">3</span>
+       					 </a>
+					</li>
+					<li class="ProfileCardStats-stat Arrange-sizeFit">
+         				 <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav" title="44 Following" href="/itsmeishan10/following" data-element-term="following_stats">
+         					<span class="ProfileCardStats-statLabel u-block" >Following</span>
+          					 <span class="ProfileCardStats-statValue" data-is-compact="false" ng-model="following">{{following}}</span>
+         				 </a>
+        			</li>
+        			<li class="ProfileCardStats-stat Arrange-sizeFit">
+         				 <a class="ProfileCardStats-statLink u-textUserColor u-linkClean u-block js-nav" title="7 Followers" href="/itsmeishan10/followers" data-element-term="follower_stats">
+           					<span class="ProfileCardStats-statLabel u-block" >Followers</span>
+           					 <span class="ProfileCardStats-statValue" data-is-compact="false" ng-model="followers">{{followers}}</span>
+          				</a>
+        			</li>
+			
+			</ul>
+		
+		</div>
+		<div id="dashboard-profile-prompt"></div>
+	</div>
+
+</div>
+<!-- Twitter Feed starts -->
+<div ng-controller="TweetController">
+<div  class="content-main top-timeline-tweetbox" id="timeline">
+<div>
+<form role="form" name="tweetForm">
+    <div class="form-group">
+      <textarea class="form-control" rows="4" id="comment" style="width:500px;" maxlength="140" placeholder="What's happening?" ng-model="tweetValue"></textarea>
+      <button class="btn primary-btn pull-right tweetButton" type="submit" ng-disabled="!tweetValue" disabled="disabled" ng-click="tweet();"><span class="buttonText">Tweet</span>
+      </button>
+      
+    </div>
+  </form>
+</div>
+<div style="margin-top: 62px;">
+<div class="panel panel-default" style="margin-right: 90px; cursor: pointer;"  ng-repeat="tweet in data"> 
+  <div class="panel-body" style="height: 120px;">
+  <div><img class="avatar js-action-profile-avatar feedImage" src="/images/default_profile_tweet.png"/></div>
+  <div class="fullname"><a href ng-click="profile(tweet.userid);" style="color: #292f33;" ><strong style="margin-left: 10px;"><span ng-model="username">{{tweet.fullname}}</span> </strong> @<b style="font-weight: normal" ng-model="userid">{{tweet.userid}}</b></a><br>
+  <p style="margin-left: 40px;word-wrap: break-word;">{{tweet.tweet_comments}}</p>
+  </div>
+  
+  </div>
+  <div ng-if="showRetweetButton(tweet.retweet_user);">
+  
+	<p style="margin-left: 153px;">
+  		<a href><span class="glyphicon glyphicon-retweet" ng-click="retweet(tweet.tweet_comments,tweet.userid);"></span></a>
+  	</p>
+  </div>
+</div>
+		
+</div>
+
+
+</div>
+
+</div>
+</body>
+</html>
